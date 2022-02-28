@@ -9,6 +9,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      user.hasMany(models.Post);
+      user.hasMany(models.Comment);
+      user.hasMany(models.LikePost);
+      user.hasMany(models.LikeComment);
     }
   }
   user.init(
@@ -24,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         //validate: {
-        //    is: /^[a-z\u00C0-\u00FF ,'-]+$/i
+        //    is: REGEX
         //}
       },
       email: {

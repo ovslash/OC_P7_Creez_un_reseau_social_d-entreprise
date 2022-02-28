@@ -11,16 +11,16 @@ module.exports = {
       firstName: {
         type: Sequelize.STRING,
         allowNull: false,
-        validate: {
-          is: /^[a-z\u00C0-\u00FF ,'-]+$/i,
-        },
+        //validate: {
+        //  is: REGEX,
+        //},
       },
       lastName: {
         type: Sequelize.STRING,
         allowNull: false,
-        validate: {
-          is: /^[a-z\u00C0-\u00FF ,'-]+$/i,
-        },
+        //validate: {
+        //  is: REGEX,
+        //},
       },
       email: {
         type: Sequelize.STRING,
