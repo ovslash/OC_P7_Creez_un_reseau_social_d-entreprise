@@ -41,3 +41,31 @@ exports.signup = (req, res, next) => {
     })
     .catch((error) => res.status(500).json({ error }));
 };
+
+//--------------------------------------------------------------------------------------
+
+// logique métier pour la connexion d'un utilisateur
+exports.login = (req, res, next) => {
+  user
+    .findOne({
+      where: { email: req.body.email },
+    })
+    .then((user) => {
+      if (!user) {
+        return res.status(401).json({ error: "Utilisateur non trouvé !" });
+      }
+
+      bcrypt
+        .compare(req.body.password, user.password)
+        .then((valid) => {
+          if (!valid) {
+            return res.status(401).json({ error: "Mot de passe incorrect !" });
+          }
+          res.status(201).json(newToken(user));
+        })
+
+        .catch((error) => res.status(500).json({ error }));
+    })
+
+    .catch((error) => res.status(500).json({ error }));
+};
