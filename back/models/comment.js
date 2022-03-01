@@ -9,16 +9,16 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       comment.belongsTo(
-        models.User,
+        models.user,
         { foreignKey: "userId" },
         { onDelete: "cascade", hooks: true }
       );
       comment.belongsTo(
-        models.Post,
+        models.post,
         { foreignKey: "postId" },
         { onDelete: "cascade", hooks: true }
       );
-      comment.hasMany(models.LikeComment);
+      comment.hasMany(models.likecomment);
     }
   }
   comment.init(

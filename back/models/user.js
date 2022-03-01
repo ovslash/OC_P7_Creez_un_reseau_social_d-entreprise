@@ -9,10 +9,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      user.hasMany(models.Post);
-      user.hasMany(models.Comment);
-      user.hasMany(models.LikePost);
-      user.hasMany(models.LikeComment);
+      user.hasMany(models.post);
+      user.hasMany(models.comment);
+      user.hasMany(models.likepost);
+      user.hasMany(models.likecomment);
     }
   }
   user.init(
