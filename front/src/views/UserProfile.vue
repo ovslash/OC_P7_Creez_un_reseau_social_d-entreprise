@@ -1,9 +1,10 @@
 <template>
   <div>
-    <p><HeaderMainView /></p>
-  </div>
-  <div>
-    <p>Partie de page avec les post</p>
+    <div>
+      <p><HeaderMainView /></p>
+    </div>
+    <h1>Mon profile</h1>
+    <p>bla bla bla</p>
   </div>
 </template>
 
@@ -11,7 +12,7 @@
 import HeaderMainView from "../components/HeaderMainView.vue";
 
 export default {
-  name: "MainView",
+  name: "MyProfile",
   data() {
     return {
       timestamp: "",
