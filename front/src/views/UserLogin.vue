@@ -12,8 +12,6 @@
         <p>{{ errorMessage }}</p>
         <button @click="login" type="button">connexion avec formulaire</button>
       </form>
-
-      <router-link to="/chemin">connexion directe</router-link>
     </div>
     <div>
       <h3>Pas de compte</h3>
