@@ -4,7 +4,7 @@
   </div>
 
   <div>
-    <router-link to="/myprofile">Mon profile</router-link>
+    <router-link to="/myprofile">Mon profil</router-link>
   </div>
 
   <div>

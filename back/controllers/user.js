@@ -69,3 +69,13 @@ exports.login = (req, res, next) => {
 
     .catch((error) => res.status(500).json({ error }));
 };
+
+//--------------------------------------------------------------------------------------
+
+// logique métier pour obtenir les informations d'un utilisateur
+exports.getOneUser = (req, res, next) => {
+  user
+    .findOne({ where: { id: req.params.userId } })
+    .then((user) => res.status(200).json({ user }))
+    .catch((error) => res.status(404).json({ error }));
+};
