@@ -14,7 +14,7 @@ const rateLimit = require("express-rate-limit");
 const limiter = rateLimit({
   // nombre de requetes max
   max: 100,
-  // wtemps durant lequel un utilisateur le comptage de requetes est fait
+  // temps durant lequel pour un utilisateur le comptage de requetes est fait
   windowMs: 60 * 60 * 1000,
   message: "Too many request from this IP",
 });

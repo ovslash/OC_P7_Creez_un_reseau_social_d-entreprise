@@ -1,7 +1,8 @@
-// Gestion des fichiers reçus
+// ---------------- gestion fichiers entrants ---------- //
 
 const multer = require("multer");
 
+// correspondance extension fichier
 const MIME_TYPES = {
   "image/jpg": "jpg",
   "image/jpeg": "jpg",
@@ -10,20 +11,33 @@ const MIME_TYPES = {
 };
 
 const storage = multer.diskStorage({
-  // destination du fichier image
+  // destination des fichiers
   destination: (req, file, callback) => {
     callback(null, "images");
-  },
-
-  // nom du fichier image
+  }, // nom des fichiers
   filename: (req, file, callback) => {
-    // remplacement des " " par "_" dans le nom du fhichier
-    const name = file.originalname.split(" ").join("_");
-    // mise en place extension du fichier
     const extension = MIME_TYPES[file.mimetype];
-    // assemblage du nom - Date.now() > pour rendre le nom du fichier plus précis
+    const name = file.originalname
+      .split(" ")
+      .join("_")
+      .split("." + extension)
+      .join("_");
     callback(null, name + Date.now() + "." + extension);
   },
 });
 
-module.exports = multer({ storage: storage }).single("image");
+// verification du type de fichier
+const fileFilter = (req, file, callback) => {
+  if (
+    file.mimetype == "image/jpg" ||
+    file.mimetype == "image/jpeg" ||
+    file.mimetype == "image/png" ||
+    file.mimetype == "image/gif"
+  ) {
+    callback(null, true);
+  } else {
+    callback(null, false);
+  }
+};
+
+module.exports = multer({ storage, fileFilter }).array("image", 4);

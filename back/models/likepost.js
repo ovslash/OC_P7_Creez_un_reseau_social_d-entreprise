@@ -1,27 +1,23 @@
 "use strict";
 const { Model } = require("sequelize");
-module.exports = (sequelize, DataTypes) => {
-  class likepost extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
 
+module.exports = (sequelize, DataTypes) => {
+  class LikePost extends Model {
+    // associations entre les tables
     static associate(models) {
-      likepost.belongsTo(
-        models.user,
+      LikePost.belongsTo(
+        models.User,
         { foreignKey: "userId" },
         { onDelete: "cascade", hooks: true }
       );
-      likepost.belongsTo(
-        models.post,
+      LikePost.belongsTo(
+        models.Post,
         { foreignKey: "postId" },
         { onDelete: "cascade", hooks: true }
       );
     }
   }
-  likepost.init(
+  LikePost.init(
     {
       userId: {
         type: DataTypes.INTEGER,
@@ -34,8 +30,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "likepost",
+      modelName: "LikePost",
     }
   );
-  return likepost;
+  return LikePost;
 };

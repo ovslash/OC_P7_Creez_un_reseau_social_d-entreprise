@@ -1,7 +1,7 @@
 "use strict";
 module.exports = {
-  async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("users", {
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.createTable("Users", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -11,16 +11,16 @@ module.exports = {
       firstName: {
         type: Sequelize.STRING,
         allowNull: false,
-        //validate: {
-        //  is: REGEX,
-        //},
+        validate: {
+          is: /^[a-z\u00C0-\u00FF ,'-]+$/i,
+        },
       },
       lastName: {
         type: Sequelize.STRING,
         allowNull: false,
-        //validate: {
-        //  is: REGEX,
-        //},
+        validate: {
+          is: /^[a-z\u00C0-\u00FF ,'-]+$/i,
+        },
       },
       email: {
         type: Sequelize.STRING,
@@ -57,7 +57,7 @@ module.exports = {
       },
     });
   },
-  async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("users");
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.dropTable("Users");
   },
 };

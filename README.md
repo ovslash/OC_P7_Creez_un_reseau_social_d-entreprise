@@ -1,4 +1,4 @@
-oliviervillaverde_7_06092021
+Créez un réseau social d’entreprise - Groupomania
 
 Front : A faire dans le dossier /front
 
@@ -18,7 +18,7 @@ Installation MySQL et création d'une BDD.
 
 Création dossier /images
 
-nmp install
+npp install
 
 Création d'un fichier .env avec comme modele le fichier .env_sample
 

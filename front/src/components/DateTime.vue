@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>{{ timestamp }}</p>
+    {{ timestamp }}
   </div>
 </template>
 

@@ -42,12 +42,16 @@ export default {
 
   data() {
     return {
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      password2: "",
       form: {
         firstName: "",
         lastName: "",
         email: "",
         password: "",
-        password2: "",
       },
 
       errorMessage: "",

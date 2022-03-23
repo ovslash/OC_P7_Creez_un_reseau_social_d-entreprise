@@ -1,39 +1,39 @@
 "use strict";
 module.exports = {
-  async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("posts", {
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.createTable("LikeComments", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
-        onDelete: "CASCADE",
       },
       userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "users",
+          model: "Users",
           key: "id",
         },
         onDelete: "CASCADE",
       },
-      description: {
-        type: Sequelize.TEXT,
-        allowNull: false,
-      },
-      imageUrl: {
-        type: Sequelize.TEXT,
-        allowNull: false,
-        defaultValue: "",
-      },
-      likesCount: {
+      postId: {
         type: Sequelize.INTEGER,
-        defaultValue: 0,
+        allowNull: false,
+        references: {
+          model: "Posts",
+          key: "id",
+        },
+        onDelete: "CASCADE",
       },
-      commentsCount: {
+      commentId: {
         type: Sequelize.INTEGER,
-        defaultValue: 0,
+        allowNull: true,
+        references: {
+          model: "Comments",
+          key: "id",
+        },
+        onDelete: "CASCADE",
       },
       createdAt: {
         allowNull: false,
@@ -45,7 +45,7 @@ module.exports = {
       },
     });
   },
-  async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("posts");
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.dropTable("LikeComments");
   },
 };
