@@ -1,3 +1,5 @@
+<!-- page de creation de compte -->
+
 <template>
   <div>
     <h1>Inscrition</h1>

@@ -1,20 +1,20 @@
+<!-- en-tete du site -->
+
 <template>
   <div>
-    <div>
+    <div class="d-flex justify-content-center">
       <DateTime />
-    </div>
-    <div>{{ user.firstName }} {{ user.lastName }}</div>
-    <div>
+
+      <button @click="mainView" type="button">Les publications</button>
+      {{ user.firstName }} {{ user.lastName }}
       <ProfileImage
         imageHeight="30"
         :imageUrl="user.profilePhoto"
         :alt="`avatar ${user.firstName}`"
       />
-    </div>
-    <div>
+
       <router-link to="/myprofile">Mon profil</router-link>
-    </div>
-    <div>
+
       <button @click="logout" type="button">logout</button>
     </div>
     <div>
@@ -40,6 +40,10 @@ export default {
     ProfileImage,
   },
   methods: {
+    mainView() {
+      router.push({ name: "groupomania" });
+    },
+
     logout() {
       localStorage.clear();
       router.push({ name: "login" });

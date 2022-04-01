@@ -1,3 +1,5 @@
+<!-- gestion image utilisateur -->
+
 <template>
   <b-img
     :height="imageHeight"

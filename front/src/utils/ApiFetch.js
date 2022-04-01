@@ -1,8 +1,7 @@
-//----------------------- fichier contenant configuration pour les requêtes http Fetch -----------------------//
+// partie commune des requetes //
 
 import router from "../router/index";
 
-// classe pour creer plus facilement les requêtes http, eviter répétitions
 class ApiFetch {
   constructor() {
     this.baseUrl = "http://localhost:3000/api";

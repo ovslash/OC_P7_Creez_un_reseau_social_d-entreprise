@@ -1,3 +1,5 @@
+<!-- outil permetant d'avoir la date et l'heure en temps reel -->
+
 <template>
   <div>
     {{ timestamp }}
@@ -5,6 +7,8 @@
 </template>
 
 <script>
+// import dayjs from "dayjs";
+
 export default {
   name: "DateTime",
   data() {

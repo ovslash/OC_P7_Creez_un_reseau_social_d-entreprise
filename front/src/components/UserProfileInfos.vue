@@ -1,3 +1,5 @@
+<!-- outil permetant d'avoir les informations sur un utilisateur -->
+
 <template>
   <div>
     <h1>{{ userPageTitle }} {{ user.firstName }} {{ user.lastName }}</h1>

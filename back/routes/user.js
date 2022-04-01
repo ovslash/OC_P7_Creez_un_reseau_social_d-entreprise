@@ -1,4 +1,4 @@
-//-------------- les routes --------------- //
+//-------------- les routes user --------------- //
 
 const express = require("express");
 const router = express.Router();
@@ -12,7 +12,7 @@ const auth = require("../middleware/auth");
 router.post("/signup", userCtrl.signup);
 router.post("/login", userCtrl.login);
 
-// routes gestion utilisateur
+// routes gestion utilisateurs
 router.get("/user-profile/:userId", userCtrl.getOneUser);
 router.put("/user-profile/:userId", auth, multer, userCtrl.editUser);
 router.put("/user-profile/settings/:userId", auth, userCtrl.changePassword);

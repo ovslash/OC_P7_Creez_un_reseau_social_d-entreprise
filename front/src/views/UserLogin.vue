@@ -1,23 +1,17 @@
+<!-- page d'accueil du site / login -->
+
 <template>
   <div>
     <div>
       <h1>Accueil</h1>
       <div>
         <h2>login</h2>
-        <form>
-          <label for="login-email">Email</label>
-          <input v-model="email" type="text" placeholder="Adresse mail" />
-          <label for="login-password">Mot de passe</label>
-          <input
-            v-model="password"
-            type="password"
-            placeholder="Mot de passe"
-          />
-          <p>{{ errorMessage }}</p>
-          <button @click="login" type="button">
-            connexion avec formulaire
-          </button>
-        </form>
+        <label for="login-email">Email</label>
+        <input v-model="email" type="text" placeholder="Adresse mail" />
+        <label for="login-password">Mot de passe</label>
+        <input v-model="password" type="password" placeholder="Mot de passe" />
+        <p>{{ errorMessage }}</p>
+        <button @click="login" type="button">connexion avec formulaire</button>
       </div>
       <p>-------------------------------------------------------</p>
       <div>
