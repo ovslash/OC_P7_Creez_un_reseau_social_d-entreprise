@@ -7,6 +7,7 @@ import Login from "../views/UserLogin.vue";
 import Signup from "../views/UserSignup.vue";
 import MainView from "../views/MainView.vue";
 import MyProfile from "../views/MyProfile.vue";
+import AdminView from "../views/AdminView.vue";
 
 Vue.use(VueRouter);
 
@@ -30,6 +31,11 @@ const routes = [
     path: "/myprofile",
     name: "monprofil",
     component: MyProfile,
+  },
+  {
+    path: "/admin",
+    name: "adminView",
+    component: AdminView,
   },
 ];
 

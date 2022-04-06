@@ -105,7 +105,7 @@ exports.deletePost = (req, res, next) => {
     .catch((error) => res.status(500).json({ error }));
 };
 
-//logique metier pour obtenir toute les publications
+//logique metier pour obtenir toutes les publications
 exports.getAllPosts = (req, res, next) => {
   const options = {
     include: db.User,

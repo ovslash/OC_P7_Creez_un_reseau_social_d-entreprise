@@ -3,9 +3,9 @@
 <template>
   <div>
     <div v-if="mode == 'default'">
-      <button @click="changeMode" type="button">
+      <b-button @click="changeMode" type="button">
         Pour créer une publication
-      </button>
+      </b-button>
     </div>
     <div v-if="mode == 'edit'">
       <b-form @submit.prevent="createPost">
@@ -28,12 +28,9 @@
           />
           <div class="preview-media"></div>
           <b-button @click="cancel" type="reset">Annuler</b-button>
-          <!-- <button @click="cancel" type="button">Retour</button> -->
           <b-button type="submit">Publier</b-button>
-          <!-- <button @click="createPost" type="button">Publier</button> -->
         </b-card>
       </b-form>
-      --------------------------------------------------
     </div>
   </div>
 </template>

@@ -4,93 +4,124 @@
   <div>
     <h1>Modification du profil</h1>
 
+    <h2>Informations générales</h2>
     <!-- changer les infos générales -->
-    <div>
-      <h2>Informations générales</h2>
-      <ProfileImage
-        imageHeight="70"
-        :imageUrl="profilePhoto"
-        class="profileImage"
-        alt="mon avatar"
-      />
+    <b-form @submit.prevent="update">
+      <b-form-group>
+        <ProfileImage
+          imageHeight="70"
+          :imageUrl="profilePhoto"
+          class="profileImage"
+          alt="mon avatar"
+        />
+        <input
+          type="file"
+          id="edit-profile-input"
+          name="image"
+          accept=".jpg, .jpeg, .png"
+          autocomplete="photo"
+          @change="updateProfileImage()"
+        />
+        <label for="edit-profile-input" role="button"
+          >changer l'image de profil</label
+        >
+      </b-form-group>
 
-      <input
-        type="file"
-        id="edit-profile-input"
-        name="image"
-        accept=".jpg, .jpeg, .png"
-        autocomplete="photo"
-        @change="updateProfileImage()"
-      />
-      <label
-        for="edit-profile-input"
-        class="px-1 mb-0 mx-3 text-primary text-nowrap"
-        role="button"
-        >changer l'image de profil</label
-      ><br />
+      <b-form-group>
+        <label for="first-name">Prénom</label>
+        <b-form-input v-model="form.firstName" type="text" id="first-name">
+        </b-form-input>
+      </b-form-group>
 
-      <label for="first-name">Prénom</label>
-      <input id="firstName" v-model="form.firstName" type="text" />
+      <b-form-group
+        ><label for="last-name">Nom</label>
+        <b-form-input v-model="form.lastName" type="text" id="last-name">
+        </b-form-input
+      ></b-form-group>
 
-      <label for="last-name">Nom</label>
-      <input v-model="form.lastName" type="text" placeholder="Nom" /><br />
+      <b-form-group>
+        <label for="profession">Profession</label>
+        <b-form-input
+          v-model="form.profession"
+          type="text"
+          placeholder="profession"
+          id="profession"
+        ></b-form-input>
+      </b-form-group>
 
-      <label for="profession">Profession</label>
-      <input
-        v-model="form.profession"
-        type="text"
-        placeholder="Profession"
-      /><br />
+      <b-form-group>
+        <label for="description">Description</label>
+        <b-form-input
+          v-model="form.userDescription"
+          type="text"
+          placeholder="Description"
+          id="description"
+        ></b-form-input>
+      </b-form-group>
 
-      <label for="description">Description</label>
-      <input
-        v-model="form.userDescription"
-        type="text"
-        placeholder="Description"
-      /><br />
+      <p>{{ errorMessage }}</p>
 
-      <button @click="cancel" type="button">retour</button>
-      <button @click="update" type="button">valider</button><br />
-    </div>
+      <b-button @click="cancel">retour</b-button>
+      <b-button type="submit">Modifier</b-button>
+    </b-form>
 
     <!-- changer le mot de passe -->
-    <div>
-      <h2>Changer le mot de passe</h2>
-      <div>
+
+    <h2>Mot de passe</h2>
+
+    <b-form @submit.prevent="changePassword">
+      <b-form-group>
         <label for="password">Ancien mot de passe</label>
-        <input
+        <b-form-input
           v-model="passwordChangeForm.currentPassword"
           type="password"
-        /><br />
+          id="password"
+        ></b-form-input>
+      </b-form-group>
 
-        <label for="password">Nouveau mot de passe</label>
-        <input v-model="passwordChangeForm.newPassword" type="password" /><br />
+      <b-form-group>
+        <label for="passwordNew">Nouveau mot de passe</label>
+        <b-form-input
+          v-model="passwordChangeForm.newPassword"
+          type="password"
+          id="passwordNew"
+        ></b-form-input>
+      </b-form-group>
 
-        <label for="password">Nouveau mot de passe</label>
-        <input
+      <b-form-group>
+        <label for="passwordNewConfirm">Nouveau mot de passe</label>
+        <b-form-input
           v-model="passwordChangeForm.newPasswordConfirm"
           type="password"
-        /><br />
+          id="passwordNewConfirm"
+        ></b-form-input>
+      </b-form-group>
 
-        <p>{{ errorMessage }}</p>
+      <p>{{ errorMessage }}</p>
 
-        <button @click="cancel" type="button">retour</button>
-        <button @click="changePassword" type="button">
-          Changer mot de passe
-        </button>
-      </div>
-    </div>
+      <b-button @click="cancel">retour</b-button>
+      <b-button type="submit">Modifier</b-button>
+    </b-form>
 
     <!-- supprimer le compte -->
-    <div>
-      <h2>Supprimer le compte</h2>
-      <p>Pour supprimer votre compte veuillez saisir "SUPPIMER"</p>
-      <label for="delete"></label>
-      <input v-model="deleteUserForm" type="text" /><br />
+
+    <h2>Supprimer le compte</h2>
+
+    <b-form @submit.prevent="deleteUser">
+      <b-form-group>
+        <p>Pour supprimer votre compte veuillez saisir "SUPPIMER"</p>
+        <label for="delete"></label>
+        <b-form-input
+          v-model="deleteUserForm"
+          type="text"
+          id="delete"
+        ></b-form-input>
+      </b-form-group>
       <p>{{ errorMessageDelete }}</p>
-      <button @click="cancel" type="button">retour</button>
-      <button @click="deleteUser" type="button">Supprimer le compte</button>
-    </div>
+
+      <b-button @click="cancel">retour</b-button>
+      <b-button type="submit">Supprimer</b-button>
+    </b-form>
   </div>
 </template>
 
@@ -108,7 +139,7 @@ export default {
 
   data() {
     return {
-      DeleteUserForm: "",
+      deleteUserForm: "",
       profilePhoto: "",
       user: JSON.parse(localStorage.getItem("userData")),
       form: {

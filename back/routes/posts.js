@@ -1,4 +1,4 @@
-//----------------------- les routes posts -----------------------//
+//------------------- les routes posts -----------------------//
 
 const express = require("express");
 const router = express.Router();

@@ -5,6 +5,7 @@ const app = express();
 // import routes
 const userRoutes = require("./routes/user");
 const postsRoutes = require("./routes/posts");
+const commentsRoutes = require("./routes/comments");
 
 const path = require("path");
 
@@ -31,5 +32,6 @@ app.use("/images", express.static(path.join(__dirname, "images")));
 // routes utilisées
 app.use("/api/auth", userRoutes);
 app.use("/api/posts", postsRoutes);
+app.use("/api/posts", commentsRoutes);
 
 module.exports = app;

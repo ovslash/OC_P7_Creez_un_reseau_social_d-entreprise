@@ -2,7 +2,7 @@
 
 <template>
   <div>
-    <label>{{ labelTitle }}</label>
+    <label :for="inputImageId" role="button">{{ labelTitle }}</label>
     <input
       type="file"
       :id="inputImageId"

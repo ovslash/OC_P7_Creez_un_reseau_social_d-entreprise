@@ -2,14 +2,251 @@
 
 <template>
   <div>
-    <p>NB de commantaires / Commenter .................... NB j'aime</p>
+    <div class="d-flex justify-content-center">
+      <div>
+        <!-- gestion affichage Nb de commentaires -->
+        <p v-if="postcommentsCount == 0">Aucun commentaire</p>
+        <p v-if="postcommentsCount == 1">{{ postcommentsCount }} commentaire</p>
+        <p v-if="postcommentsCount > 1">{{ postcommentsCount }} commentaires</p>
+      </div>
+
+      <div
+        @click="showComments"
+        v-if="modeShowComments == 'default' && postcommentsCount > 0"
+      >
+        Afficher
+      </div>
+      <div @click="hideComments" v-if="modeShowComments == 'showComments'">
+        Masquer
+      </div>
+      <div @click="showCreateComment">Commenter</div>
+      <div>POUCE</div>
+    </div>
+
+    <!-- Affichage commentaires -->
+    <div v-if="modeShowComments == 'showComments'">
+      <b-card
+        v-for="comments in commentsList"
+        :key="comments.id"
+        header-tag="header"
+      >
+        <template #header>
+          <div class="d-flex justify-content-center">
+            <ProfileImage
+              imageHeight="40"
+              :imageUrl="comments.User.profilePhoto"
+              :alt="`image de profil de ${comments.User.firstName}`"
+            />
+            <p>{{ comments.User.firstName }} {{ comments.User.lastName }}</p>
+            <p>
+              Il y a {{ dayjs(comments.createdAt).locale("fr").fromNow(true) }}
+            </p>
+
+            <!--  modification et suppression commentairee -->
+            <b-dropdown id="dropdown-right" right class="m-2">
+              <b-dropdown-item v-b-modal="'modal-comment-modify-' + comments.id"
+                >Modifier</b-dropdown-item
+              >
+
+              <b-modal
+                :id="'modal-comment-modify-' + comments.id"
+                title="Modifier le commentaire"
+                ok-title="modifier"
+                cancel-title="annuler"
+                @ok="modifyComment(`${comments.id}`, $event)"
+                centered
+              >
+                <b-form class="col p-2 overflow-hidden">
+                  <b-form-textarea
+                    rows="2"
+                    max-rows="10"
+                    v-model="comments.description"
+                    class="modify-description"
+                    title="modifier le commentaire"
+                  ></b-form-textarea>
+
+                  <p v-if="errorMessage">
+                    {{ errorMessage }}
+                  </p>
+                </b-form>
+              </b-modal>
+
+              <b-dropdown-item v-b-modal="'modal-comment-delete' + comments.id">
+                Supprimer
+              </b-dropdown-item>
+              <b-modal
+                :id="'modal-comment-delete' + comments.id"
+                title="Voulez-vous vraiment supprimer ce commentaire ?"
+                ok-title="supprimer"
+                cancel-title="annuler"
+                @ok="deleteComment(`${comments.id}`)"
+                centered
+              >
+                <p>Le commentaire sera supprimé définitivement.</p>
+              </b-modal>
+            </b-dropdown>
+          </div>
+        </template>
+        <p>{{ comments.description }}</p>
+      </b-card>
+    </div>
+
+    <!-- Creation commentaire -->
+    <div v-if="modeCreationComment == 'createComment'">
+      <b-card>
+        <b-form @submit.prevent="createComment">
+          <b-form-textarea
+            placeholder="Ecrivez un commentaire"
+            rows="1"
+            v-model="commentDescription"
+          >
+          </b-form-textarea>
+          <p class="text-danger">{{ errorMessage }}</p>
+          <b-button @click="cancel" type="reset">Annuler</b-button>
+          <b-button type="submit">Commenter</b-button>
+        </b-form>
+      </b-card>
+    </div>
   </div>
 </template>
 
 <script>
-//import ProfileImage from './ProfileImage.vue';
+import { apiFetch } from "../utils/ApiFetch";
+import ProfileImage from "../components/ProfileImage.vue";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+dayjs.extend(relativeTime);
+require("dayjs/locale/fr");
+import { eventBus } from "../main.js";
 
 export default {
   name: "PostFooter",
+
+  components: {
+    ProfileImage,
+  },
+
+  props: {
+    post: { type: Object },
+  },
+
+  data() {
+    return {
+      modeShowComments: "default",
+      modeCreationComment: "default",
+      commentDescription: "",
+      errorMessage: "",
+      userData: JSON.parse(localStorage.getItem("userData")),
+      dayjs: dayjs,
+      postcommentsCount: "",
+    };
+  },
+
+  created() {
+    apiFetch
+      .get(`/posts/${this.post.id}/comments/`)
+      .then((data) => {
+        this.commentsList = data.comments.rows;
+        this.postcommentsCount = this.post.commentsCount;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    eventBus.$on("loadPostComments", () => {
+      this.loadPostComments();
+    });
+    eventBus.$on("forceRerenderCommentCreate", () => {
+      this.forceRerender();
+    });
+  },
+
+  methods: {
+    showCreateComment() {
+      this.modeCreationComment = "createComment";
+    },
+    cancel() {
+      this.modeCreationComment = "default";
+    },
+
+    loadPostComments() {
+      apiFetch
+        .get(`/posts/${this.post.id}/comments/`)
+        .then((data) => {
+          this.commentsList = data.comments.rows;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
+    createComment() {
+      const commentDescription = this.commentDescription;
+      const userId = this.userData.id;
+
+      if (commentDescription !== "") {
+        this.errorMessage = "";
+        let body = {
+          userId: Number(userId),
+          description: commentDescription,
+        };
+        apiFetch
+          .post(`/posts/${this.post.id}/comment`, body)
+          .then(() => {
+            this.commentDescription = "";
+            this.modeCreationComment = "default";
+            this.loadPostComments();
+          })
+          .catch((error) => {
+            console.log(error);
+            this.errorMessage = "une erreur est survenue";
+          });
+        this.postcommentsCount += 1;
+      } else {
+        this.errorMessage = "vous ne pouvez pas ajouter un commentaire vide";
+      }
+    },
+
+    showComments() {
+      this.modeShowComments = "showComments";
+    },
+
+    hideComments() {
+      this.modeShowComments = "default";
+    },
+
+    modifyComment(id, event) {
+      const description = document.querySelector(".modify-description").value;
+      if (description === "") {
+        this.loadPostComments();
+        event.preventDefault();
+        this.errorMessage = "vous ne pouvez pas envoyer un commentaire vide";
+      } else {
+        this.errorMessage = "";
+        let body = {
+          description: description,
+        };
+        apiFetch
+          .put(`/posts/${this.post.id}/comment/` + id, body)
+          .then(() => {
+            this.loadPostComments();
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    },
+
+    deleteComment(id) {
+      apiFetch
+        .delete(`/posts/${this.post.id}/comment/` + id)
+        .then(() => {
+          this.loadPostComments();
+          // this.postcommentsCount -= 1;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  },
 };
 </script>

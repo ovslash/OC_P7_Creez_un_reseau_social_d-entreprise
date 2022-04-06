@@ -1,5 +1,7 @@
 Créez un réseau social d’entreprise - Groupomania
 
+---
+
 Front : A faire dans le dossier /front
 
 npm install

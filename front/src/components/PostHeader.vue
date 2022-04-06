@@ -106,10 +106,6 @@ export default {
     };
   },
 
-  mounted() {
-    console.log(this.post.description);
-  },
-
   methods: {
     deletePost(id) {
       apiFetch

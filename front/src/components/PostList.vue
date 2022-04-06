@@ -10,7 +10,7 @@
           </template>
           <PostContent :post="post" :loadPosts="loadPosts" />
           <template #footer>
-            <PostFooter />
+            <PostFooter :post="post" />
           </template>
         </b-card>
       </b-card-group>
