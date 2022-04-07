@@ -1,77 +1,86 @@
 <!-- header de la publication / details user et depuis quand -->
 
 <template>
-  <div class="d-flex justify-content-center">
-    <ProfileImage
-      imageHeight="40"
-      :imageUrl="post.User.profilePhoto"
-      :alt="`image de profil de ${post.User.firstName}`"
-    />
+  <b-row align-v="center">
+    <b-col cols="11" class="d-flex align-items-bottom"
+      ><ProfileImage
+        imageHeight="50"
+        :imageUrl="post.User.profilePhoto"
+        :alt="`image de profil de ${post.User.firstName}`"
+      />
 
-    <p>{{ post.User.firstName }} {{ post.User.lastName }}</p>
-
-    <p>Il y à {{ dayjs(post.createdAt).locale("fr").fromNow(true) }}</p>
-    <!-- ------------------------modification du post ------------------------------------- -->
-    <b-dropdown
-      id="dropdown-right"
-      right
-      class="m-2"
-      v-if="post.userId == this.userData.id || this.userData.admin == '1'"
-    >
-      <b-dropdown-item v-b-modal="'modal-modify' + post.id"
-        >Modifier</b-dropdown-item
+      <div class="px-1 d-flex">
+        <div class="d-flex align-items-center">
+          {{ post.User.firstName }} {{ post.User.lastName }}
+        </div>
+        <div class="d-flex align-items-center px-1">
+          il y a {{ dayjs(post.createdAt).locale("fr").fromNow(true) }}
+        </div>
+      </div>
+    </b-col>
+    <b-col cols="1" class="px-0 d-flex justify-content-end"
+      ><!-- ------------------------modification du post ------------------------------------- -->
+      <b-dropdown
+        id="dropdown-right"
+        right
+        class="m-2"
+        v-if="post.userId == this.userData.id || this.userData.admin == '1'"
       >
-      <b-modal
-        :id="'modal-modify' + post.id"
-        title="Modifier la publication"
-        ok-title="modifier"
-        cancel-title="annuler"
-        @ok="modifyPost(`${post.id}`, $event)"
-        centered
-      >
-        <b-form class="col p-2 overflow-hidden">
-          <!-- modification contenu -->
-          <b-form-textarea
-            rows="2"
-            max-rows="10"
-            v-model="description"
-            class="modify-description"
-          ></b-form-textarea>
+        <b-dropdown-item v-b-modal="'modal-modify' + post.id"
+          >Modifier</b-dropdown-item
+        >
+        <b-modal
+          :id="'modal-modify' + post.id"
+          title="Modifier la publication"
+          ok-title="modifier"
+          cancel-title="annuler"
+          @ok="modifyPost(`${post.id}`, $event)"
+          centered
+        >
+          <b-form class="col p-2 overflow-hidden">
+            <!-- modification contenu -->
+            <b-form-textarea
+              rows="2"
+              max-rows="10"
+              v-model="description"
+              class="modify-description"
+            ></b-form-textarea>
 
-          <!-- ajout de médias -->
-          <PostInputMedia
-            labelTitle="modifier médias"
-            inputImageId="input-image-modify"
-            inputImageClass="input-file-modify"
-            previewMedia=".preview-media-modify"
-            inputFile=".input-file-modify"
-          />
+            <!-- ajout de médias -->
+            <PostInputMedia
+              labelTitle="modifier médias"
+              inputImageId="input-image-modify"
+              inputImageClass="input-file-modify"
+              previewMedia=".preview-media-modify"
+              inputFile=".input-file-modify"
+            />
 
-          <!-- preview des images -->
-          <div class="preview-media-modify text-secondary font-italic">
-            <div v-for="value in imageUrl" :key="value">
-              <b-img :src="value" alt="" class="post-images"></b-img>
+            <!-- preview des images -->
+            <div class="preview-media-modify text-secondary font-italic">
+              <div v-for="value in imageUrl" :key="value">
+                <b-img :src="value" alt="" class="post-images"></b-img>
+              </div>
             </div>
-          </div>
-          <p class="text-danger" v-if="errorMessage">{{ errorMessage }}</p>
-        </b-form>
-      </b-modal>
+            <p class="text-danger" v-if="errorMessage">{{ errorMessage }}</p>
+          </b-form>
+        </b-modal>
 
-      <!-- -------------------suppresion post--------------------------------------- -->
-      <b-dropdown-item v-b-modal="'modal-' + post.id" class="delete-option"
-        >Supprimer</b-dropdown-item
-      >
-      <b-modal
-        :id="'modal-' + post.id"
-        title="Voulez-vous vraiment supprimer cette publication ?"
-        ok-title="supprimer"
-        cancel-title="annuler"
-        @ok="deletePost(`${post.id}`)"
-      >
-        <p>La publication sera supprimée définitivement.</p>
-      </b-modal>
-    </b-dropdown>
-  </div>
+        <!-- -------------------suppresion post--------------------------------------- -->
+        <b-dropdown-item v-b-modal="'modal-' + post.id" class="delete-option"
+          >Supprimer</b-dropdown-item
+        >
+        <b-modal
+          :id="'modal-' + post.id"
+          title="Voulez-vous vraiment supprimer cette publication ?"
+          ok-title="supprimer"
+          cancel-title="annuler"
+          @ok="deletePost(`${post.id}`)"
+        >
+          <p>La publication sera supprimée définitivement.</p>
+        </b-modal>
+      </b-dropdown></b-col
+    >
+  </b-row>
 </template>
 
 <script>

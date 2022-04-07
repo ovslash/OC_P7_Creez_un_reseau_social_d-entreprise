@@ -34,10 +34,6 @@
       </div>
 
       <router-link to="/admin" v-if="this.user.admin == '1'">ADMIN</router-link>
-
-      <div>
-        ---------------------------------------------------------------------
-      </div>
     </div>
   </div>
 </template>

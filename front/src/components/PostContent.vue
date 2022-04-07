@@ -1,19 +1,17 @@
 <!-- contenu de la publication -->
 
 <template>
-  <div>
-    <!-- CONTENU PUBLICATION -->
-    <div>
-      <div>
-        <b-card-text class="post-content">
-          <!-- texte -->
-          <p class="text-break text-left">{{ post.description }}</p>
-          <!-- images -->
-          <PostImages :post="post" v-if="imageUrl.length > 0" />
-        </b-card-text>
-      </div>
-    </div>
-  </div>
+  <!-- CONTENU PUBLICATION -->
+  <b-row>
+    <b-col>
+      <b-card-text class="post-content">
+        <!-- texte -->
+        <p class="text-break text-left">{{ post.description }}</p>
+        <!-- images -->
+        <PostImages :post="post" v-if="imageUrl.length > 0" />
+      </b-card-text>
+    </b-col>
+  </b-row>
 </template>
 
 <script>
@@ -34,3 +32,9 @@ export default {
   },
 };
 </script>
+
+<style>
+.post-content {
+  white-space: pre-wrap;
+}
+</style>

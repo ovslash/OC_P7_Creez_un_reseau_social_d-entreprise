@@ -2,6 +2,11 @@
 
 <template>
   <div>
+    <div class="d-flex">
+      <div class="p-2">Flex item</div>
+      <div class="p-2">Flex item</div>
+      <div class="ml-auto p-2">Flex item</div>
+    </div>
     <div class="d-flex justify-content-center">
       <div>
         <!-- gestion affichage Nb de commentaires -->
@@ -31,60 +36,71 @@
         header-tag="header"
       >
         <template #header>
-          <div class="d-flex justify-content-center">
-            <ProfileImage
-              imageHeight="40"
-              :imageUrl="comments.User.profilePhoto"
-              :alt="`image de profil de ${comments.User.firstName}`"
-            />
-            <p>{{ comments.User.firstName }} {{ comments.User.lastName }}</p>
-            <p>
-              Il y a {{ dayjs(comments.createdAt).locale("fr").fromNow(true) }}
-            </p>
+          <div align-v="center" class="d-flex">
+            <div class="d-flex align-items-center">
+              <ProfileImage
+                imageHeight="40"
+                :imageUrl="comments.User.profilePhoto"
+                :alt="`image de profil de ${comments.User.firstName}`"
+              />
+              <div class="px-1 d-flex">
+                <div class="d-flex align-items-center">
+                  {{ comments.User.firstName }} {{ comments.User.lastName }}
+                </div>
 
-            <!--  modification et suppression commentairee -->
-            <b-dropdown id="dropdown-right" right class="m-2">
-              <b-dropdown-item v-b-modal="'modal-comment-modify-' + comments.id"
-                >Modifier</b-dropdown-item
-              >
+                <div class="d-flex align-items-center px-1">
+                  il y a
+                  {{ dayjs(comments.createdAt).locale("fr").fromNow(true) }}
+                </div>
+              </div>
+            </div>
 
-              <b-modal
-                :id="'modal-comment-modify-' + comments.id"
-                title="Modifier le commentaire"
-                ok-title="modifier"
-                cancel-title="annuler"
-                @ok="modifyComment(`${comments.id}`, $event)"
-                centered
-              >
-                <b-form class="col p-2 overflow-hidden">
-                  <b-form-textarea
-                    rows="2"
-                    max-rows="10"
-                    v-model="comments.description"
-                    class="modify-description"
-                    title="modifier le commentaire"
-                  ></b-form-textarea>
+            <div class="d-flex">
+              <b-dropdown id="dropdown-right" right class="m-2">
+                <b-dropdown-item
+                  v-b-modal="'modal-comment-modify-' + comments.id"
+                  >Modifier</b-dropdown-item
+                >
+                <b-modal
+                  :id="'modal-comment-modify-' + comments.id"
+                  title="Modifier le commentaire"
+                  ok-title="modifier"
+                  cancel-title="annuler"
+                  @ok="modifyComment(`${comments.id}`, $event)"
+                  centered
+                >
+                  <b-form class="col p-2 overflow-hidden">
+                    <b-form-textarea
+                      rows="2"
+                      max-rows="10"
+                      v-model="comments.description"
+                      class="modify-description"
+                      title="modifier le commentaire"
+                    ></b-form-textarea>
 
-                  <p v-if="errorMessage">
-                    {{ errorMessage }}
-                  </p>
-                </b-form>
-              </b-modal>
+                    <p v-if="errorMessage">
+                      {{ errorMessage }}
+                    </p>
+                  </b-form>
+                </b-modal>
 
-              <b-dropdown-item v-b-modal="'modal-comment-delete' + comments.id">
-                Supprimer
-              </b-dropdown-item>
-              <b-modal
-                :id="'modal-comment-delete' + comments.id"
-                title="Voulez-vous vraiment supprimer ce commentaire ?"
-                ok-title="supprimer"
-                cancel-title="annuler"
-                @ok="deleteComment(`${comments.id}`)"
-                centered
-              >
-                <p>Le commentaire sera supprimé définitivement.</p>
-              </b-modal>
-            </b-dropdown>
+                <b-dropdown-item
+                  v-b-modal="'modal-comment-delete' + comments.id"
+                >
+                  Supprimer
+                </b-dropdown-item>
+                <b-modal
+                  :id="'modal-comment-delete' + comments.id"
+                  title="Voulez-vous vraiment supprimer ce commentaire ?"
+                  ok-title="supprimer"
+                  cancel-title="annuler"
+                  @ok="deleteComment(`${comments.id}`)"
+                  centered
+                >
+                  <p>Le commentaire sera supprimé définitivement.</p>
+                </b-modal>
+              </b-dropdown>
+            </div>
           </div>
         </template>
         <p>{{ comments.description }}</p>

@@ -1,9 +1,9 @@
 <!-- page d'accueil du site / login -->
 
 <template>
-  <b-container fluid>
+  <b-container>
     <b-row>
-      <b-col class="d-sm-flex flex-column align-items-center">
+      <b-col class="d-sm-flex flex-column align-items-center text-center">
         <b-img
           :src="require('../assets/images/icon-left-font-monochrome-black.png')"
           alt="groupomania logo"
@@ -35,7 +35,7 @@
                 ></b-form-input>
               </div>
             </b-form-group>
-            <p class="text-left text-danger mb-3">{{ errorMessage }}</p>
+            <p>{{ errorMessage }}</p>
             <b-button type="submit">Connexion</b-button>
           </b-form>
         </div>
@@ -47,8 +47,6 @@
         </div>
       </b-col>
     </b-row>
-    <!-------------------------------------- -->
-    <div></div>
   </b-container>
 </template>
 

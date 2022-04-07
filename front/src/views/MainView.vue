@@ -1,22 +1,21 @@
 <!-- vue principale du site -->
 
 <template>
-  <div>
-    <div>
+  <b-container>
+    <header>
       <HeaderMainView />
-    </div>
-    <div>
-      <h1>PUBLICATIONS</h1>
-      <div>
-        <p>CREATION PUBLICATION</p>
+    </header>
+    <main>
+      <h1 class="center">Les dernières publications</h1>
+      <div class="center">
         <PostCreation />
       </div>
       <div>
-        <p>LA LISTE DES PUBLICATIONS</p>
         <PostList />
       </div>
-    </div>
-  </div>
+    </main>
+    <footer></footer>
+  </b-container>
 </template>
 
 <script>
@@ -34,3 +33,9 @@ export default {
   },
 };
 </script>
+
+<style>
+.center {
+  text-align: center;
+}
+</style>
