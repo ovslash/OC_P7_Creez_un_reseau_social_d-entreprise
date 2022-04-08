@@ -4,124 +4,129 @@
   <div>
     <h1>Modification du profil</h1>
 
-    <h2>Informations générales</h2>
     <!-- changer les infos générales -->
-    <b-form @submit.prevent="update">
-      <b-form-group>
-        <ProfileImage
-          imageHeight="70"
-          :imageUrl="profilePhoto"
-          class="profileImage"
-          alt="mon avatar"
-        />
-        <input
-          type="file"
-          id="edit-profile-input"
-          name="image"
-          accept=".jpg, .jpeg, .png"
-          autocomplete="photo"
-          @change="updateProfileImage()"
-        />
-        <label for="edit-profile-input" role="button"
-          >changer l'image de profil</label
-        >
-      </b-form-group>
+    <b-card class="mb-3 shadow">
+      <h2>Informations générales</h2>
+      <b-form @submit.prevent="update">
+        <b-form-group class="mb-3">
+          <ProfileImage
+            imageHeight="70"
+            :imageUrl="profilePhoto"
+            class="profileImage"
+            alt="mon avatar"
+          />
+          <label for="edit-profile-input" role="button"
+            >changer l'image de profil</label
+          >
+          <input
+            type="file"
+            id="edit-profile-input"
+            name="image"
+            accept=".jpg, .jpeg, .png"
+            autocomplete="photo"
+            @change="updateProfileImage()"
+            hidden
+          />
+        </b-form-group>
 
-      <b-form-group>
-        <label for="first-name">Prénom</label>
-        <b-form-input v-model="form.firstName" type="text" id="first-name">
-        </b-form-input>
-      </b-form-group>
+        <b-form-group class="mb-3">
+          <label for="first-name">Prénom</label>
+          <b-form-input v-model="form.firstName" type="text" id="first-name">
+          </b-form-input>
+        </b-form-group>
 
-      <b-form-group
-        ><label for="last-name">Nom</label>
-        <b-form-input v-model="form.lastName" type="text" id="last-name">
-        </b-form-input
-      ></b-form-group>
+        <b-form-group class="mb-3"
+          ><label for="last-name">Nom</label>
+          <b-form-input v-model="form.lastName" type="text" id="last-name">
+          </b-form-input
+        ></b-form-group>
 
-      <b-form-group>
-        <label for="profession">Profession</label>
-        <b-form-input
-          v-model="form.profession"
-          type="text"
-          placeholder="profession"
-          id="profession"
-        ></b-form-input>
-      </b-form-group>
+        <b-form-group class="mb-3">
+          <label for="profession">Profession</label>
+          <b-form-input
+            v-model="form.profession"
+            type="text"
+            placeholder="profession"
+            id="profession"
+          ></b-form-input>
+        </b-form-group>
 
-      <b-form-group>
-        <label for="description">Description</label>
-        <b-form-input
-          v-model="form.userDescription"
-          type="text"
-          placeholder="Description"
-          id="description"
-        ></b-form-input>
-      </b-form-group>
+        <b-form-group class="mb-3">
+          <label for="description">Description</label>
+          <b-form-input
+            v-model="form.userDescription"
+            type="text"
+            placeholder="Description"
+            id="description"
+          ></b-form-input>
+        </b-form-group>
 
-      <p>{{ errorMessage }}</p>
+        <p>{{ errorMessage }}</p>
 
-      <b-button @click="cancel">retour</b-button>
-      <b-button type="submit">Modifier</b-button>
-    </b-form>
+        <b-button class="m-1" @click="cancel">Retour</b-button>
+        <b-button class="m-1" type="submit">Modifier</b-button>
+      </b-form>
+    </b-card>
 
     <!-- changer le mot de passe -->
 
-    <h2>Mot de passe</h2>
+    <b-card class="mb-3 shadow">
+      <h2>Mot de passe</h2>
 
-    <b-form @submit.prevent="changePassword">
-      <b-form-group>
-        <label for="password">Ancien mot de passe</label>
-        <b-form-input
-          v-model="passwordChangeForm.currentPassword"
-          type="password"
-          id="password"
-        ></b-form-input>
-      </b-form-group>
+      <b-form @submit.prevent="changePassword">
+        <b-form-group>
+          <label for="password">Ancien mot de passe</label>
+          <b-form-input
+            v-model="passwordChangeForm.currentPassword"
+            type="password"
+            id="password"
+          ></b-form-input>
+        </b-form-group>
 
-      <b-form-group>
-        <label for="passwordNew">Nouveau mot de passe</label>
-        <b-form-input
-          v-model="passwordChangeForm.newPassword"
-          type="password"
-          id="passwordNew"
-        ></b-form-input>
-      </b-form-group>
+        <b-form-group>
+          <label for="passwordNew">Nouveau mot de passe</label>
+          <b-form-input
+            v-model="passwordChangeForm.newPassword"
+            type="password"
+            id="passwordNew"
+          ></b-form-input>
+        </b-form-group>
 
-      <b-form-group>
-        <label for="passwordNewConfirm">Nouveau mot de passe</label>
-        <b-form-input
-          v-model="passwordChangeForm.newPasswordConfirm"
-          type="password"
-          id="passwordNewConfirm"
-        ></b-form-input>
-      </b-form-group>
+        <b-form-group>
+          <label for="passwordNewConfirm">Nouveau mot de passe</label>
+          <b-form-input
+            v-model="passwordChangeForm.newPasswordConfirm"
+            type="password"
+            id="passwordNewConfirm"
+          ></b-form-input>
+        </b-form-group>
 
-      <p>{{ errorMessage }}</p>
+        <p>{{ errorMessage }}</p>
 
-      <b-button @click="cancel">retour</b-button>
-      <b-button type="submit">Modifier</b-button>
-    </b-form>
+        <b-button class="m-1" @click="cancel">Retour</b-button>
+        <b-button class="m-1" type="submit">Modifier</b-button>
+      </b-form>
+    </b-card>
 
     <!-- supprimer le compte -->
+    <b-card class="mb-3 shadow">
+      <h2>Supprimer le compte</h2>
+      <b-form @submit.prevent="deleteUser">
+        <b-form-group>
+          <span>Pour supprimer votre compte veuillez saisir "SUPPIMER"</span>
+          <label for="delete"></label>
+          <b-form-input
+            v-model="deleteUserForm"
+            type="text"
+            id="delete"
+          ></b-form-input>
+        </b-form-group>
+        <p>{{ errorMessageDelete }}</p>
 
-    <h2>Supprimer le compte</h2>
-
-    <b-form @submit.prevent="deleteUser">
-      <b-form-group>
-        <p>Pour supprimer votre compte veuillez saisir "SUPPIMER"</p>
-        <label for="delete"></label>
-        <b-form-input
-          v-model="deleteUserForm"
-          type="text"
-          id="delete"
-        ></b-form-input>
-      </b-form-group>
-      <p>{{ errorMessageDelete }}</p>
-
-      <b-button @click="cancel">retour</b-button>
-      <b-button type="submit">Supprimer</b-button>
-    </b-form>
+        <b-button class="m-1" @click="cancel">Retour</b-button>
+        <b-button class="m-1" type="submit">Supprimer</b-button>
+      </b-form>
+    </b-card>
   </div>
 </template>
 

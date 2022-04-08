@@ -4,7 +4,7 @@
   <div>
     <div>
       <b-card-group v-for="post in posts" :key="post.updatedAt">
-        <b-card header-tag="header" footer-tag="footer">
+        <b-card header-tag="header" footer-tag="footer" class="mb-3 shadow">
           <template #header>
             <PostHeader :post="post" :loadPosts="loadPosts" />
           </template>

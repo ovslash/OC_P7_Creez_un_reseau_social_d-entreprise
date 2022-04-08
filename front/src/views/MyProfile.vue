@@ -1,23 +1,26 @@
 <!-- page mon profil -->
 
 <template>
-  <div>
+  <b-container class="center">
     <div>
       <HeaderMainView />
     </div>
+
     <div v-if="mode == 'show'">
-      <p>info sur mon profil</p>
-      <UserProfileInfos
-        userPageTitle="Mon Profil :"
-        :userId="this.userData.id"
-      />
-      <button @click="changeMode" type="button">Editer le profil</button>
+      <b-card class="shadow"
+        ><UserProfileInfos
+          userPageTitle="Mon Profil :"
+          :userId="this.userData.id"
+        />
+        <b-button @click="changeMode" class="m-1" type="submit"
+          >Editer le profil</b-button
+        >
+      </b-card>
     </div>
     <div v-if="mode == 'edit'">
-      <p>modif du profile</p>
       <MyProfileEdit @returnShow="returnShow" />
     </div>
-  </div>
+  </b-container>
 </template>
 
 <script>
@@ -54,3 +57,9 @@ export default {
   },
 };
 </script>
+
+<style>
+.center {
+  text-align: center;
+}
+</style>

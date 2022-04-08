@@ -1,7 +1,12 @@
 <!-- en-tete du site -->
 
 <template>
-  <div>
+  <div class="center">
+    <b-img
+      :src="require('../assets/images/icon-left-font-monochrome-black.png')"
+      alt="groupomania logo"
+      fluid
+    ></b-img>
     <div>
       <b-nav>
         <b-nav-item to="/groupomania" exact>
@@ -69,3 +74,9 @@ export default {
   },
 };
 </script>
+
+<style>
+.center {
+  text-align: center;
+}
+</style>

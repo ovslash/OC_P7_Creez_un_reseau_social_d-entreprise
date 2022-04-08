@@ -63,14 +63,15 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style scoped>
 .img-div {
   height: 250px;
 }
 
 .post-image {
-  height: auto;
-  width: 100%;
+  height: 100%;
+  width: auto;
+  max-width: 100%;
   object-fit: cover;
   max-height: 20rem;
 }

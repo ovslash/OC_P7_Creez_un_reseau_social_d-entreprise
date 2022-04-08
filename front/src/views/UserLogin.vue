@@ -13,8 +13,8 @@
 
         <div>
           <h2>Connexion</h2>
-          <b-form class="form-width my-5" @submit.prevent="login">
-            <b-form-group>
+          <b-form class="form-width my-3" @submit.prevent="login">
+            <b-form-group class="mb-3">
               <div class="input-div" id="email">
                 <label for="login-email">Email</label>
                 <b-form-input
@@ -25,7 +25,7 @@
               </div>
             </b-form-group>
 
-            <b-form-group>
+            <b-form-group class="mb-3">
               <div class="input-div" id="password">
                 <label for="login-password">Mot de passe</label>
                 <b-form-input

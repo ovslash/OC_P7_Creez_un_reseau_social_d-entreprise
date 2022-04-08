@@ -3,34 +3,37 @@
 <template>
   <div>
     <div v-if="mode == 'default'">
-      <b-button @click="changeMode" type="button">
+      <b-button @click="changeMode" type="button" class="mb-3">
         Pour créer une publication
       </b-button>
     </div>
     <div v-if="mode == 'edit'">
-      <b-form @submit.prevent="createPost">
-        <b-card>
-          <b-form-textarea
-            placeholder="Ecrivez quelque chose ..."
-            rows="3"
-            v-model="description"
-            title="Créer une publication"
-          ></b-form-textarea>
+      <b-card class="shadow mb-3"
+        ><b-form @submit.prevent="createPost">
+          <b-card class="mb-3">
+            <b-form-textarea
+              placeholder="Ecrivez quelque chose ..."
+              rows="3"
+              v-model="description"
+              title="Créer une publication"
+            ></b-form-textarea>
 
-          <p>{{ errorMessage }}</p>
-
-          <PostInputMedia
-            labelTitle="Pour ajouter des images"
-            inputImageId="input-image"
-            inputImageClass="input-file"
-            previewMedia=".preview-media"
-            inputFile=".input-file"
-          />
-          <div class="preview-media"></div>
-          <b-button @click="cancel" type="reset">Annuler</b-button>
-          <b-button type="submit">Publier</b-button>
-        </b-card>
-      </b-form>
+            <PostInputMedia
+              labelTitle="Ajouter des images"
+              inputImageId="input-image"
+              inputImageClass="input-file"
+              previewMedia=".preview-media"
+              inputFile=".input-file"
+            />
+            <div class="preview-media"></div>
+            <p>{{ errorMessage }}</p>
+            <b-button class="m-1" @click="cancel" type="reset"
+              >Annuler</b-button
+            >
+            <b-button class="m-1" type="submit">Publier</b-button>
+          </b-card>
+        </b-form></b-card
+      >
     </div>
   </div>
 </template>

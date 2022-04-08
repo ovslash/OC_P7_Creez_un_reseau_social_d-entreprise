@@ -2,7 +2,7 @@
 
 <template>
   <b-row align-v="center">
-    <b-col cols="11" class="d-flex align-items-bottom"
+    <b-col cols="11" class="d-flex align-items-center"
       ><ProfileImage
         imageHeight="50"
         :imageUrl="post.User.profilePhoto"
@@ -10,10 +10,10 @@
       />
 
       <div class="px-1 d-flex">
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center header-font-name">
           {{ post.User.firstName }} {{ post.User.lastName }}
         </div>
-        <div class="d-flex align-items-center px-1">
+        <div class="d-flex align-items-center px-1 header-date">
           il y a {{ dayjs(post.createdAt).locale("fr").fromNow(true) }}
         </div>
       </div>
@@ -167,3 +167,25 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.post-content {
+  white-space: pre-wrap;
+}
+
+.preview-media-modify {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+}
+.post-images {
+  width: 100px;
+  margin: 0.3rem;
+}
+.header-font-name {
+  font-size: 1.2rem;
+}
+.header-date {
+  font-size: 0.9rem;
+}
+</style>
