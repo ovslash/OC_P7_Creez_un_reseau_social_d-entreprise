@@ -1,128 +1,156 @@
 <!-- footer de la publacation / commentaire - j'aime -->
 
 <template>
-  <div>
-    <div class="d-flex justify-content-center">
-      <div>
-        <!-- gestion affichage Nb de commentaires -->
-        <p v-if="postcommentsCount == 0">Aucun commentaire</p>
-        <p v-if="postcommentsCount == 1">{{ postcommentsCount }} commentaire</p>
-        <p v-if="postcommentsCount > 1">{{ postcommentsCount }} commentaires</p>
+  <b-container>
+    <b-row>
+      <div class="d-flex align-items-center">
+        <div class="margin-r">
+          <!-- gestion affichage Nb de commentaires -->
+          <div v-if="postcommentsCount == 0">
+            0 <b-icon icon="chat-left-text" aria-label="accueil"></b-icon>
+          </div>
+          <div v-if="postcommentsCount == 1">
+            {{ postcommentsCount }}
+            <b-icon icon="chat-left-text" aria-label="accueil"></b-icon>
+          </div>
+          <div v-if="postcommentsCount > 1">
+            {{ postcommentsCount }}
+            <b-icon icon="chat-left-text" aria-label="accueil"></b-icon>
+          </div>
+        </div>
+
+        <div
+          @click="showComments"
+          v-if="modeShowComments == 'default' && postcommentsCount > 0"
+          class="margin-r"
+        >
+          Afficher
+        </div>
+        <div
+          @click="hideComments"
+          v-if="modeShowComments == 'showComments'"
+          class="margin-r"
+        >
+          Masquer
+        </div>
+        <div class="margin-r" @click="showCreateComment">Commenter</div>
+        <div
+          class="flex-grow-1 heart"
+          v-b-tooltip.hover.left="'Fonctionnalité à venir'"
+        >
+          <b-icon icon="suit-heart" aria-label="accueil"></b-icon>
+        </div>
       </div>
+    </b-row>
 
-      <div
-        @click="showComments"
-        v-if="modeShowComments == 'default' && postcommentsCount > 0"
-      >
-        Afficher
-      </div>
-      <div @click="hideComments" v-if="modeShowComments == 'showComments'">
-        Masquer
-      </div>
-      <div @click="showCreateComment">Commenter</div>
-      <div>POUCE</div>
-    </div>
-
-    <!-- Affichage commentaires -->
-    <div v-if="modeShowComments == 'showComments'">
-      <b-card
-        v-for="comments in commentsList"
-        :key="comments.id"
-        header-tag="header"
-      >
-        <template #header>
-          <container>
-            <b-row align-v="center">
-              <b-col cols="11" class="d-flex align-items-bottom">
-                <div class="d-flex align-items-center">
-                  <ProfileImage
-                    imageHeight="40"
-                    :imageUrl="comments.User.profilePhoto"
-                    :alt="`image de profil de ${comments.User.firstName}`"
-                  />
-                  <div class="px-1 d-flex">
-                    <div class="d-flex align-items-center">
-                      {{ comments.User.firstName }} {{ comments.User.lastName }}
-                    </div>
-
-                    <div class="d-flex align-items-center px-1">
-                      il y a
-                      {{ dayjs(comments.createdAt).locale("fr").fromNow(true) }}
-                    </div>
-                  </div>
-                </div>
-              </b-col>
-
-              <b-col cols="1" class="px-0 d-flex justify-content-end">
-                <b-dropdown id="dropdown-right" right class="m-2">
-                  <b-dropdown-item
-                    v-b-modal="'modal-comment-modify-' + comments.id"
-                    >Modifier</b-dropdown-item
-                  >
-                  <b-modal
-                    :id="'modal-comment-modify-' + comments.id"
-                    title="Modifier le commentaire"
-                    ok-title="modifier"
-                    cancel-title="annuler"
-                    @ok="modifyComment(`${comments.id}`, $event)"
-                    centered
-                  >
-                    <b-form class="col p-2 overflow-hidden">
-                      <b-form-textarea
-                        rows="2"
-                        max-rows="10"
-                        v-model="comments.description"
-                        class="modify-description"
-                        title="modifier le commentaire"
-                      ></b-form-textarea>
-
-                      <p v-if="errorMessage">
-                        {{ errorMessage }}
-                      </p>
-                    </b-form>
-                  </b-modal>
-
-                  <b-dropdown-item
-                    v-b-modal="'modal-comment-delete' + comments.id"
-                  >
-                    Supprimer
-                  </b-dropdown-item>
-                  <b-modal
-                    :id="'modal-comment-delete' + comments.id"
-                    title="Voulez-vous vraiment supprimer ce commentaire ?"
-                    ok-title="supprimer"
-                    cancel-title="annuler"
-                    @ok="deleteComment(`${comments.id}`)"
-                    centered
-                  >
-                    <p>Le commentaire sera supprimé définitivement.</p>
-                  </b-modal>
-                </b-dropdown>
-              </b-col>
-            </b-row>
-          </container>
-        </template>
-        <p>{{ comments.description }}</p>
-      </b-card>
-    </div>
-
-    <!-- Creation commentaire -->
-    <div v-if="modeCreationComment == 'createComment'">
-      <b-card>
-        <b-form @submit.prevent="createComment">
-          <b-form-textarea
-            placeholder="Ecrivez un commentaire"
-            rows="1"
-            v-model="commentDescription"
+    <b-row align-v="center">
+      <b-col>
+        <!-- Affichage commentaires -->
+        <div v-if="modeShowComments == 'showComments'">
+          <b-card
+            v-for="comments in commentsList"
+            :key="comments.id"
+            header-tag="header"
           >
-          </b-form-textarea>
-          <p class="text-danger">{{ errorMessage }}</p>
-          <b-button @click="cancel" type="reset">Annuler</b-button>
-          <b-button type="submit">Commenter</b-button>
-        </b-form>
-      </b-card>
-    </div>
-  </div>
+            <template #header>
+              <container>
+                <b-row align-v="center">
+                  <b-col cols="11" class="d-flex align-items-center">
+                    <div class="d-flex align-items-center">
+                      <ProfileImage
+                        imageHeight="40"
+                        :imageUrl="comments.User.profilePhoto"
+                        :alt="`image de profil de ${comments.User.firstName}`"
+                      />
+                      <div class="px-1 d-flex">
+                        <div class="d-flex align-items-center">
+                          {{ comments.User.firstName }}
+                          {{ comments.User.lastName }}
+                        </div>
+
+                        <div class="d-flex align-items-center px-1 header-date">
+                          il y a
+                          {{
+                            dayjs(comments.createdAt).locale("fr").fromNow(true)
+                          }}
+                        </div>
+                      </div>
+                    </div>
+                  </b-col>
+
+                  <b-col cols="1" class="px-0 d-flex justify-content-end">
+                    <b-dropdown id="dropdown-right" right class="m-2">
+                      <b-dropdown-item
+                        v-b-modal="'modal-comment-modify-' + comments.id"
+                        >Modifier</b-dropdown-item
+                      >
+                      <b-modal
+                        :id="'modal-comment-modify-' + comments.id"
+                        title="Modifier le commentaire"
+                        ok-title="modifier"
+                        cancel-title="annuler"
+                        @ok="modifyComment(`${comments.id}`, $event)"
+                        centered
+                      >
+                        <b-form class="col p-2 overflow-hidden">
+                          <b-form-textarea
+                            rows="2"
+                            max-rows="10"
+                            v-model="comments.description"
+                            class="modify-description"
+                            title="modifier le commentaire"
+                          ></b-form-textarea>
+
+                          <p v-if="errorMessage">
+                            {{ errorMessage }}
+                          </p>
+                        </b-form>
+                      </b-modal>
+
+                      <b-dropdown-item
+                        v-b-modal="'modal-comment-delete' + comments.id"
+                      >
+                        Supprimer
+                      </b-dropdown-item>
+                      <b-modal
+                        :id="'modal-comment-delete' + comments.id"
+                        title="Voulez-vous vraiment supprimer ce commentaire ?"
+                        ok-title="supprimer"
+                        cancel-title="annuler"
+                        @ok="deleteComment(`${comments.id}`)"
+                        centered
+                      >
+                        <p>Le commentaire sera supprimé définitivement.</p>
+                      </b-modal>
+                    </b-dropdown>
+                  </b-col>
+                </b-row>
+              </container>
+            </template>
+            <p>{{ comments.description }}</p>
+          </b-card>
+        </div>
+      </b-col>
+    </b-row>
+    <b-row>
+      <!-- Creation commentaire -->
+      <div v-if="modeCreationComment == 'createComment'" class="center">
+        <b-card>
+          <b-form @submit.prevent="createComment">
+            <b-form-textarea
+              placeholder="Ecrivez un commentaire"
+              rows="1"
+              v-model="commentDescription"
+            >
+            </b-form-textarea>
+            <p class="text-danger">{{ errorMessage }}</p>
+            <b-button @click="cancel" type="reset">Annuler</b-button>
+            <b-button type="submit">Commenter</b-button>
+          </b-form>
+        </b-card>
+      </div>
+    </b-row>
+  </b-container>
 </template>
 
 <script>
@@ -265,3 +293,17 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.margin-r {
+  margin-right: 10px;
+}
+.header-date {
+  font-size: 0.8rem;
+}
+.heart {
+  position: absolute;
+  right: 25px;
+  bottom: 11px;
+}
+</style>

@@ -2,19 +2,24 @@
 
 <template>
   <div>
-    <div>
-      <b-card-group v-for="post in posts" :key="post.updatedAt">
-        <b-card header-tag="header" footer-tag="footer" class="mb-3 shadow">
-          <template #header>
-            <PostHeader :post="post" :loadPosts="loadPosts" />
-          </template>
-          <PostContent :post="post" :loadPosts="loadPosts" />
-          <template #footer>
-            <PostFooter :post="post" />
-          </template>
-        </b-card>
-      </b-card-group>
-    </div>
+    <b-card-group v-for="post in posts" :key="post.updatedAt">
+      <b-card
+        header-tag="header"
+        footer-tag="footer"
+        class="mb-3 shadow"
+        header-bg-variant="default"
+        footer-bg-variant="default"
+      >
+        <template #header>
+          <PostHeader :post="post" :loadPosts="loadPosts" />
+        </template>
+
+        <PostContent :post="post" :loadPosts="loadPosts" />
+        <template #footer>
+          <PostFooter :post="post" />
+        </template>
+      </b-card>
+    </b-card-group>
   </div>
 </template>
 

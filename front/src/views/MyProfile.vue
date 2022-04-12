@@ -1,26 +1,30 @@
 <!-- page mon profil -->
 
 <template>
-  <b-container class="center">
+  <div>
     <div>
       <HeaderMainView />
     </div>
-
-    <div v-if="mode == 'show'">
-      <b-card class="shadow"
-        ><UserProfileInfos
-          userPageTitle="Mon Profil :"
-          :userId="this.userData.id"
-        />
-        <b-button @click="changeMode" class="m-1" type="submit"
-          >Editer le profil</b-button
-        >
-      </b-card>
+    <b-container class="center">
+      <div v-if="mode == 'show'">
+        <b-card class="shadow"
+          ><UserProfileInfos
+            userPageTitle="Mon Profil :"
+            :userId="this.userData.id"
+          />
+          <b-button @click="changeMode" class="m-1" type="submit"
+            >Editer le profil</b-button
+          >
+        </b-card>
+      </div>
+      <div v-if="mode == 'edit'">
+        <MyProfileEdit @returnShow="returnShow" />
+      </div>
+    </b-container>
+    <div class="mt-3">
+      <FooterMainView />
     </div>
-    <div v-if="mode == 'edit'">
-      <MyProfileEdit @returnShow="returnShow" />
-    </div>
-  </b-container>
+  </div>
 </template>
 
 <script>
@@ -28,6 +32,7 @@ import HeaderMainView from "../components/HeaderMainView.vue";
 import UserProfileInfos from "../components/UserProfileInfos.vue";
 import MyProfileEdit from "../components/MyProfileEdit.vue";
 import { eventBus } from "../main.js";
+import FooterMainView from "../components/FooterMainView.vue";
 
 export default {
   name: "MyProfil",
@@ -35,6 +40,7 @@ export default {
     HeaderMainView,
     UserProfileInfos,
     MyProfileEdit,
+    FooterMainView,
   },
   data() {
     return {

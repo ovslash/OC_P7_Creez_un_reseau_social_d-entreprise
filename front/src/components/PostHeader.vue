@@ -48,7 +48,7 @@
 
             <!-- ajout de médias -->
             <PostInputMedia
-              labelTitle="modifier médias"
+              labelTitle="Modifier les images"
               inputImageId="input-image-modify"
               inputImageClass="input-file-modify"
               previewMedia=".preview-media-modify"
@@ -168,7 +168,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .post-content {
   white-space: pre-wrap;
 }

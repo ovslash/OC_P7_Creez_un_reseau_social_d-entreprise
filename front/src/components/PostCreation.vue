@@ -10,28 +10,24 @@
     <div v-if="mode == 'edit'">
       <b-card class="shadow mb-3"
         ><b-form @submit.prevent="createPost">
-          <b-card class="mb-3">
-            <b-form-textarea
-              placeholder="Ecrivez quelque chose ..."
-              rows="3"
-              v-model="description"
-              title="Créer une publication"
-            ></b-form-textarea>
+          <b-form-textarea
+            placeholder="Ecrivez quelque chose ..."
+            rows="3"
+            v-model="description"
+            title="Créer une publication"
+          ></b-form-textarea>
 
-            <PostInputMedia
-              labelTitle="Ajouter des images"
-              inputImageId="input-image"
-              inputImageClass="input-file"
-              previewMedia=".preview-media"
-              inputFile=".input-file"
-            />
-            <div class="preview-media"></div>
-            <p>{{ errorMessage }}</p>
-            <b-button class="m-1" @click="cancel" type="reset"
-              >Annuler</b-button
-            >
-            <b-button class="m-1" type="submit">Publier</b-button>
-          </b-card>
+          <PostInputMedia
+            labelTitle="Ajouter des images"
+            inputImageId="input-image"
+            inputImageClass="input-file"
+            previewMedia=".preview-media"
+            inputFile=".input-file"
+          />
+          <div class="preview-media"></div>
+          <p>{{ errorMessage }}</p>
+          <b-button class="m-1" @click="cancel" type="reset">Annuler</b-button>
+          <b-button class="m-1" type="submit">Publier</b-button>
         </b-form></b-card
       >
     </div>

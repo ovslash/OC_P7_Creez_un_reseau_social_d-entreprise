@@ -5,9 +5,9 @@
     <h1>Modification du profil</h1>
 
     <!-- changer les infos générales -->
-    <b-card class="mb-3 shadow">
+    <b-card class="mb-3 shadow d-flex align-items-center">
       <h2>Informations générales</h2>
-      <b-form @submit.prevent="update">
+      <b-form @submit.prevent="update" class="form-w">
         <b-form-group class="mb-3">
           <ProfileImage
             imageHeight="70"
@@ -70,10 +70,10 @@
 
     <!-- changer le mot de passe -->
 
-    <b-card class="mb-3 shadow">
+    <b-card class="mb-3 shadow d-flex align-items-center">
       <h2>Mot de passe</h2>
 
-      <b-form @submit.prevent="changePassword">
+      <b-form @submit.prevent="changePassword" class="form-w">
         <b-form-group>
           <label for="password">Ancien mot de passe</label>
           <b-form-input
@@ -109,7 +109,7 @@
     </b-card>
 
     <!-- supprimer le compte -->
-    <b-card class="mb-3 shadow">
+    <b-card class="mb-3 shadow d-flex align-items-center">
       <h2>Supprimer le compte</h2>
       <b-form @submit.prevent="deleteUser">
         <b-form-group>
@@ -119,6 +119,7 @@
             v-model="deleteUserForm"
             type="text"
             id="delete"
+            class="form-w2"
           ></b-form-input>
         </b-form-group>
         <p>{{ errorMessageDelete }}</p>
@@ -258,3 +259,12 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.form-w {
+  max-width: 300px;
+}
+.form-w2 {
+  max-width: 150px;
+}
+</style>
