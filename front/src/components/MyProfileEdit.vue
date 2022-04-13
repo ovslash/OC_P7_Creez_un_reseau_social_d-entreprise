@@ -61,7 +61,7 @@
           ></b-form-input>
         </b-form-group>
 
-        <p>{{ errorMessage }}</p>
+        <p class="text-danger small">{{ errorMessage }}</p>
 
         <b-button class="m-1" @click="cancel">Retour</b-button>
         <b-button class="m-1" type="submit">Modifier</b-button>
@@ -101,7 +101,7 @@
           ></b-form-input>
         </b-form-group>
 
-        <p>{{ errorMessage }}</p>
+        <p class="text-danger small">{{ errorMessage }}</p>
 
         <b-button class="m-1" @click="cancel">Retour</b-button>
         <b-button class="m-1" type="submit">Modifier</b-button>
@@ -119,10 +119,10 @@
             v-model="deleteUserForm"
             type="text"
             id="delete"
-            class="form-w2"
+            class="center"
           ></b-form-input>
         </b-form-group>
-        <p>{{ errorMessageDelete }}</p>
+        <p class="text-danger small">{{ errorMessageDelete }}</p>
 
         <b-button class="m-1" @click="cancel">Retour</b-button>
         <b-button class="m-1" type="submit">Supprimer</b-button>
@@ -230,7 +230,7 @@ export default {
               localStorage.clear();
               router.push({ name: "login" });
             } else {
-              this.errorMessage = "Le mot de passe actuel est érroné";
+              this.errorMessage = "Le mot de passe actuel est érroné.";
             }
             console.log(res);
           })
@@ -239,7 +239,7 @@ export default {
           });
       } else {
         this.errorMessage =
-          "Les mots nouveaux de passe doivent etre identiques";
+          "Les nouveaux mots de passe doivent etre identiques.";
       }
     },
 
@@ -253,7 +253,7 @@ export default {
         localStorage.clear();
         router.push({ name: "login" });
       } else {
-        this.errorMessageDelete = "`SUPPRIMER` doit etre saisi ";
+        this.errorMessageDelete = "SUPPRIMER doit etre saisi. ";
       }
     },
   },

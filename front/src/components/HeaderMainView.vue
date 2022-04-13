@@ -54,7 +54,6 @@
       ></b-img>
       <b-nav class="d-flex justify-content-center">
         <!-- <DateTime /> -->
-
         <b-nav-item @click="mainView">
           <b-icon
             icon="card-text"
@@ -68,7 +67,7 @@
         <b-nav-item to="/myprofile" exact>
           <div class="menu-text">
             <ProfileImage
-              imageHeight="33"
+              imageHeight="32"
               :imageUrl="user.profilePhoto"
               :alt="`avatar ${user.firstName}`"
             /><br />
@@ -161,6 +160,7 @@ export default {
 .menu-text {
   text-decoration: none;
   color: white;
+  margin-bottom: 0;
 }
 
 @media (min-width: 576px) {

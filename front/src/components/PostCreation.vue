@@ -25,7 +25,7 @@
             inputFile=".input-file"
           />
           <div class="preview-media"></div>
-          <p>{{ errorMessage }}</p>
+          <p class="text-danger small">{{ errorMessage }}</p>
           <b-button class="m-1" @click="cancel" type="reset">Annuler</b-button>
           <b-button class="m-1" type="submit">Publier</b-button>
         </b-form></b-card
@@ -100,10 +100,10 @@ export default {
           })
           .catch((error) => {
             console.log(error);
-            this.errorMessage = "une erreur est survenue";
+            this.errorMessage = "Une erreur est survenue";
           });
       } else {
-        this.errorMessage = "vous ne pouvez pas créer une publication vide";
+        this.errorMessage = "Vous ne pouvez pas créer une publication vide";
       }
     },
 

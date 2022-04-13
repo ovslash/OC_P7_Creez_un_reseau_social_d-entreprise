@@ -53,7 +53,7 @@
             header-tag="header"
           >
             <template #header>
-              <container>
+              <b-container>
                 <b-row align-v="center">
                   <b-col cols="11" class="d-flex align-items-center">
                     <div class="d-flex align-items-center">
@@ -125,7 +125,7 @@
                     </b-dropdown>
                   </b-col>
                 </b-row>
-              </container>
+              </b-container>
             </template>
             <p>{{ comments.description }}</p>
           </b-card>
@@ -143,9 +143,11 @@
               v-model="commentDescription"
             >
             </b-form-textarea>
-            <p class="text-danger">{{ errorMessage }}</p>
-            <b-button @click="cancel" type="reset">Annuler</b-button>
-            <b-button type="submit">Commenter</b-button>
+            <p class="text-danger small">{{ errorMessage }}</p>
+            <b-button class="m-1" @click="cancel" type="reset"
+              >Annuler</b-button
+            >
+            <b-button class="m-1" type="submit">Commenter</b-button>
           </b-form>
         </b-card>
       </div>
@@ -189,17 +191,17 @@ export default {
     apiFetch
       .get(`/posts/${this.post.id}/comments/`)
       .then((data) => {
+        console.log(data);
+        console.log(data.comments.count);
         this.commentsList = data.comments.rows;
-        this.postcommentsCount = this.post.commentsCount;
+        //this.postcommentsCount = this.post.commentsCount;
+        this.postcommentsCount = data.comments.count;
       })
       .catch((error) => {
         console.log(error);
       });
     eventBus.$on("loadPostComments", () => {
       this.loadPostComments();
-    });
-    eventBus.$on("forceRerenderCommentCreate", () => {
-      this.forceRerender();
     });
   },
 
@@ -238,14 +240,15 @@ export default {
             this.commentDescription = "";
             this.modeCreationComment = "default";
             this.loadPostComments();
+            this.modeShowComments = "default";
+            this.postcommentsCount += 1;
           })
           .catch((error) => {
             console.log(error);
-            this.errorMessage = "une erreur est survenue";
+            this.errorMessage = "Une erreur est survenue.";
           });
-        this.postcommentsCount += 1;
       } else {
-        this.errorMessage = "vous ne pouvez pas ajouter un commentaire vide";
+        this.errorMessage = "Vous ne pouvez pas ajouter un commentaire vide.";
       }
     },
 
@@ -262,7 +265,7 @@ export default {
       if (description === "") {
         this.loadPostComments();
         event.preventDefault();
-        this.errorMessage = "vous ne pouvez pas envoyer un commentaire vide";
+        this.errorMessage = "Vous ne pouvez pas envoyer un commentaire vide.";
       } else {
         this.errorMessage = "";
         let body = {
@@ -272,6 +275,7 @@ export default {
           .put(`/posts/${this.post.id}/comment/` + id, body)
           .then(() => {
             this.loadPostComments();
+            this.modeShowComments = "default";
           })
           .catch((error) => {
             console.log(error);
@@ -284,7 +288,8 @@ export default {
         .delete(`/posts/${this.post.id}/comment/` + id)
         .then(() => {
           this.loadPostComments();
-          // this.postcommentsCount -= 1;
+          this.modeShowComments = "default";
+          this.postcommentsCount -= 1;
         })
         .catch((error) => {
           console.log(error);
@@ -304,6 +309,5 @@ export default {
 .heart {
   position: absolute;
   right: 25px;
-  bottom: 11px;
 }
 </style>

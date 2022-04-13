@@ -32,7 +32,7 @@
                   ></b-form-input>
                 </div>
               </b-form-group>
-              <p>{{ errorMessage }}</p>
+              <p class="text-danger small">{{ errorMessage }}</p>
               <b-button type="submit">Connexion</b-button>
             </b-form>
           </div>
@@ -87,10 +87,11 @@ export default {
           })
           .catch((error) => {
             console.log(error);
-            this.errorMessage = "Erreur de connexion";
+            this.errorMessage = "Erreur de connexion.";
           });
       } else {
-        this.errorMessage = "Veuillez saisir votre email et votre mot de passe";
+        this.errorMessage =
+          "Veuillez saisir votre email et votre mot de passe.";
       }
     },
     signup() {

@@ -61,12 +61,20 @@
                 <b-img :src="value" alt="" class="post-images"></b-img>
               </div>
             </div>
-            <p class="text-danger" v-if="errorMessage">{{ errorMessage }}</p>
+            <p class="text-danger small" v-if="errorMessage">
+              {{ errorMessage }}
+            </p>
           </b-form>
+          <!-- ------------------------------------------------ -->
+          <template #modal-footer="{ ok, cancel }">
+            <b-button variant="secondary" @click="cancel()">Retour</b-button>
+            <b-button variant="secondary" @click="ok()"> Modifier </b-button>
+          </template>
+          <!-- ------------------------------------------------ -->
         </b-modal>
 
         <!-- -------------------suppresion post--------------------------------------- -->
-        <b-dropdown-item v-b-modal="'modal-' + post.id" class="delete-option"
+        <b-dropdown-item v-b-modal="'modal-' + post.id"
           >Supprimer</b-dropdown-item
         >
         <b-modal
@@ -77,6 +85,10 @@
           @ok="deletePost(`${post.id}`)"
         >
           <p>La publication sera supprimée définitivement.</p>
+          <template #modal-footer="{ ok, cancel }">
+            <b-button variant="secondary" @click="cancel()">Retour</b-button>
+            <b-button variant="secondary" @click="ok()"> Supprimer</b-button>
+          </template>
         </b-modal>
       </b-dropdown></b-col
     >

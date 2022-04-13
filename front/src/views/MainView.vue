@@ -7,11 +7,11 @@
     </header>
     <b-container>
       <main>
-        <h1 class="center">Les dernières publications</h1>
+        <h1 class="center my-4">Les dernières publications</h1>
         <div class="center">
           <PostCreation />
         </div>
-        <LoadSpinner />
+
         <div>
           <PostList />
         </div>
@@ -26,7 +26,6 @@ import HeaderMainView from "../components/HeaderMainView.vue";
 import PostCreation from "../components/PostCreation.vue";
 import PostList from "../components/PostList.vue";
 import FooterMainView from "../components/FooterMainView.vue";
-import LoadSpinner from "../components/LoadSpinner.vue";
 
 export default {
   name: "MainView",
@@ -36,7 +35,6 @@ export default {
     PostCreation,
     PostList,
     FooterMainView,
-    LoadSpinner,
   },
 };
 </script>

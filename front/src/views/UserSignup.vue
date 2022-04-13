@@ -71,10 +71,10 @@
               </div>
             </b-form-group>
 
-            <p class="text-left text-danger mb-3">{{ errorMessage }}</p>
+            <p class="text-danger small">{{ errorMessage }}</p>
 
-            <b-button class="m-1" @click="cancel">retour</b-button>
-            <b-button class="m-1" type="submit">inscription</b-button>
+            <b-button class="m-1" @click="cancel">Retour</b-button>
+            <b-button class="m-1" type="submit">Inscription</b-button>
           </b-form>
         </b-col>
       </b-row>
@@ -128,7 +128,7 @@ export default {
           .then((res) => {
             console.log("token:", res.token);
             if (!res.token) {
-              this.errorMessage = "Erreur, veuillez vous connecter";
+              this.errorMessage = "Erreur, veuillez vous connecter.";
             } else {
               localStorage.setItem("userToken", res.token);
               localStorage.setItem("userData", JSON.stringify(res.user));
@@ -137,10 +137,11 @@ export default {
           })
           .catch((error) => {
             console.log(error);
-            this.errorMessage = "Problèmes de connexion";
+            this.errorMessage = "Problèmes de connexion.";
           });
       } else {
-        this.errorMessage = "Le mot de passe doit etre identique";
+        this.errorMessage =
+          "La confirmation du mot de passe doit etre identique.";
       }
     },
     cancel() {
