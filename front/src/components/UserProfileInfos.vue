@@ -6,7 +6,7 @@
     <ProfileImage
       imageHeight="200"
       :imageUrl="user.profilePhoto"
-      :alt="`avatar ${user.firstName}`"
+      :alt="`avatar de ${user.firstName} ${user.lastName}`"
     />
 
     <p>{{ user.firstName }} {{ user.lastName }}</p>

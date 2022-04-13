@@ -5,7 +5,7 @@
     <div>
       <HeaderMainView />
     </div>
-    <b-container class="center">
+    <b-container class="center mb-5">
       <div v-if="mode == 'show'">
         <b-card class="shadow"
           ><UserProfileInfos

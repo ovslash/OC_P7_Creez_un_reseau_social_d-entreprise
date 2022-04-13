@@ -6,7 +6,7 @@
     <b-container>
       <b-row>
         <b-col class="d-sm-flex flex-column align-items-center text-center">
-          <h1>Bienvenue sur le réseau social</h1>
+          <h1>Réseau social</h1>
           <h2>Inscription</h2>
           <b-form class="form-width my-3 mb-3" @submit.prevent="signup">
             <b-form-group class="mb-3">

@@ -141,6 +141,7 @@
               placeholder="Ecrivez un commentaire"
               rows="1"
               v-model="commentDescription"
+              title="Créer un commentaire"
             >
             </b-form-textarea>
             <p class="text-danger small">{{ errorMessage }}</p>

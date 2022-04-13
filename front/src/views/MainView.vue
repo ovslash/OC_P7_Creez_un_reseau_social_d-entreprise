@@ -6,7 +6,7 @@
       <HeaderMainView />
     </header>
     <b-container>
-      <main>
+      <main class="mb-5">
         <h1 class="center my-4">Les dernières publications</h1>
         <div class="center">
           <PostCreation />
@@ -17,7 +17,7 @@
         </div>
       </main>
     </b-container>
-    <footer class="footer"><FooterMainView /></footer>
+    <footer><FooterMainView /></footer>
   </div>
 </template>
 

@@ -3,8 +3,8 @@
     <div>
       <HeaderMainView />
     </div>
-    <b-container class="center"
-      ><div>
+    <b-container>
+      <div>
         <h1>Administration</h1>
       </div>
       <div>
@@ -16,8 +16,8 @@
           >Envoi de messages prédéfinis vers les utilisateurs</b-card
         >
         <b-card class="shadow mb-3">...</b-card>
-      </div></b-container
-    >
+      </div>
+    </b-container>
 
     <div>
       <footer><FooterMainView /></footer>

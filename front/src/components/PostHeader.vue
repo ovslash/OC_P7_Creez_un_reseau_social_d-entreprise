@@ -25,6 +25,8 @@
         right
         class="m-2"
         v-if="post.userId == this.userData.id || this.userData.admin == '1'"
+        v-b-tooltip.hover.v-secondary.left="'paramètres'"
+        toggle-text="paramètres"
       >
         <b-dropdown-item v-b-modal="'modal-modify' + post.id"
           >Modifier</b-dropdown-item

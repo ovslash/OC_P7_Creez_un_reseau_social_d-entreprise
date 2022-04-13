@@ -6,7 +6,7 @@
     <b-container>
       <b-row>
         <b-col class="d-sm-flex flex-column align-items-center text-center">
-          <h1>Bienvenue sur le réseau social</h1>
+          <h1>Réseau social</h1>
 
           <div>
             <h2>Connexion</h2>

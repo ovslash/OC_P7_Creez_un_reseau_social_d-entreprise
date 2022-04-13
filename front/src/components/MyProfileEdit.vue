@@ -113,8 +113,9 @@
       <h2>Supprimer le compte</h2>
       <b-form @submit.prevent="deleteUser">
         <b-form-group>
-          <span>Pour supprimer votre compte veuillez saisir "SUPPIMER"</span>
-          <label for="delete"></label>
+          <label for="delete"
+            >Pour supprimer votre compte veuillez saisir "SUPPIMER"</label
+          >
           <b-form-input
             v-model="deleteUserForm"
             type="text"

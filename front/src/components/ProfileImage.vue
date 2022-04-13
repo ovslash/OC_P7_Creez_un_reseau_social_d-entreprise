@@ -5,6 +5,7 @@
     :height="imageHeight"
     :width="imageHeight"
     :src="imageUrl || require('../assets/images/noProfileImage.png')"
+    :alt="alt"
     rounded="circle"
     class="image-cover"
   ></b-img>
@@ -17,6 +18,7 @@ export default {
   props: {
     imageHeight: String,
     imageUrl: String,
+    alt: String,
   },
 };
 </script>

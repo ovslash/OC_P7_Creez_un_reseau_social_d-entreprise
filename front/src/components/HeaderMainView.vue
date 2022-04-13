@@ -1,7 +1,7 @@
 <!-- en-tete du site -->
 
 <template>
-  <div class="center bg-dark text-white mb-3">
+  <div class="center bg-dark text-white mb-3 header-fixed">
     <!-- menu mobile -->
     <div class="d-flex justify-content-between menu-mobile d-sm-none pb-1">
       <b-img
@@ -168,5 +168,11 @@ export default {
     height: 30px;
     width: 30px;
   }
+}
+
+.header-fixed {
+  position: sticky;
+  top: 0px;
+  width: 100%;
 }
 </style>
