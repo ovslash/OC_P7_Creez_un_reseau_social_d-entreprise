@@ -1,5 +1,5 @@
 <template>
-  <div class="center bg-dark text-white footer-fixed">
+  <div class="center footer-bg text-white footer-fixed">
     <p class="footer">Groupomania 2022</p>
   </div>
 </template>
@@ -20,5 +20,8 @@ export default {
   bottom: 0px;
   width: 100%;
   height: 20px;
+}
+.footer-bg {
+  background-color: #091f43 !important;
 }
 </style>

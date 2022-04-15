@@ -1,7 +1,7 @@
 <!-- footer de la publacation / commentaire - j'aime -->
 
 <template>
-  <b-container>
+  <b-container class="test">
     <b-row>
       <div class="d-flex align-items-center">
         <div class="margin-r">
@@ -52,11 +52,12 @@
             :key="comments.id"
             header-tag="header"
           >
+            <!-- entete du commentaire -->
             <template #header>
-              <b-container>
+              <b-container class="header-com">
                 <b-row align-v="center">
-                  <b-col cols="11" class="d-flex align-items-center">
-                    <div class="d-flex align-items-center">
+                  <b-col cols="11" class="d-flex">
+                    <div class="d-flex">
                       <ProfileImage
                         imageHeight="40"
                         :imageUrl="comments.User.profilePhoto"
@@ -78,8 +79,17 @@
                     </div>
                   </b-col>
 
+                  <!-- menu de droite -->
                   <b-col cols="1" class="px-0 d-flex justify-content-end">
-                    <b-dropdown id="dropdown-right" right class="m-2">
+                    <b-dropdown
+                      id="dropdown-right"
+                      right
+                      class="m-2"
+                      v-if="
+                        comments.User.id == userData.id || userData.admin == '1'
+                      "
+                    >
+                      <!-- modifier commentaire -->
                       <b-dropdown-item
                         v-b-modal="'modal-comment-modify-' + comments.id"
                         >Modifier</b-dropdown-item
@@ -107,6 +117,7 @@
                         </b-form>
                       </b-modal>
 
+                      <!-- supprimer commentaire -->
                       <b-dropdown-item
                         v-b-modal="'modal-comment-delete' + comments.id"
                       >
@@ -189,11 +200,13 @@ export default {
   },
 
   created() {
+    console.log("----------------------------");
+    console.log(this.userData.id);
+
+    console.log("----------------------------");
     apiFetch
       .get(`/posts/${this.post.id}/comments/`)
       .then((data) => {
-        console.log(data);
-        console.log(data.comments.count);
         this.commentsList = data.comments.rows;
         //this.postcommentsCount = this.post.commentsCount;
         this.postcommentsCount = data.comments.count;
@@ -310,5 +323,11 @@ export default {
 .heart {
   position: absolute;
   right: 25px;
+}
+.header-com {
+  padding: 0px;
+}
+.test {
+  padding: 0px;
 }
 </style>

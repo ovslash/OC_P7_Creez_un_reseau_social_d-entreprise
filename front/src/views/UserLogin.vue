@@ -11,7 +11,7 @@
           <div>
             <h2>Connexion</h2>
             <b-form class="form-width my-3" @submit.prevent="login">
-              <b-form-group class="mb-3">
+              <b-form-group class="mb-3" aria-label="Email pour connexion">
                 <div class="input-div" id="email">
                   <label for="login-email">Email</label>
                   <b-form-input

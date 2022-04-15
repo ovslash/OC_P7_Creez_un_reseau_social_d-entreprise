@@ -1,5 +1,5 @@
 <template>
-  <div class="center bg-dark">
+  <div class="center header-bg">
     <b-img
       :src="require('../assets/images/logo_long.png')"
       alt="groupomania logo"
@@ -18,5 +18,8 @@ export default {
 <style lang="scss" scoped>
 .logo {
   max-height: 100px;
+}
+.header-bg {
+  background-color: #091f43 !important;
 }
 </style>

@@ -1,7 +1,7 @@
 <!-- en-tete du site -->
 
 <template>
-  <div class="center bg-dark text-white mb-3 header-fixed">
+  <div class="center header-bg text-white mb-3 header-fixed">
     <!-- menu mobile -->
     <div class="d-flex justify-content-between menu-mobile d-sm-none pb-1">
       <b-img
@@ -103,7 +103,7 @@
             icon="unlock"
             aria-label="déconnexion"
           ></b-icon>
-          <p class="menu-text">logout</p>
+          <p class="menu-text">Déconnexion</p>
         </b-nav-item>
       </b-nav>
     </div>
@@ -174,5 +174,9 @@ export default {
   position: sticky;
   top: 0px;
   width: 100%;
+}
+
+.header-bg {
+  background-color: #091f43 !important;
 }
 </style>

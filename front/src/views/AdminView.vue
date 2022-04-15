@@ -3,7 +3,7 @@
     <div>
       <HeaderMainView />
     </div>
-    <b-container>
+    <b-container class="center">
       <div>
         <h1>Administration</h1>
       </div>
