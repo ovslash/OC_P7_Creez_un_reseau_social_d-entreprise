@@ -20,7 +20,7 @@ Installation MySQL et création d'une BDD.
 
 Création dossier /images
 
-npp install
+npm install
 
 Création d'un fichier .env avec comme modele le fichier .env_sample
 

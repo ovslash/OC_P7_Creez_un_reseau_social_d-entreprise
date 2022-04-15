@@ -92,6 +92,7 @@
                       <!-- modifier commentaire -->
                       <b-dropdown-item
                         v-b-modal="'modal-comment-modify-' + comments.id"
+                        v-if="comments.User.id == userData.id"
                         >Modifier</b-dropdown-item
                       >
                       <b-modal
@@ -115,6 +116,14 @@
                             {{ errorMessage }}
                           </p>
                         </b-form>
+                        <template #modal-footer="{ ok, cancel }">
+                          <b-button variant="secondary" @click="cancel()"
+                            >Retour</b-button
+                          >
+                          <b-button variant="secondary" @click="ok()">
+                            Supprimer</b-button
+                          >
+                        </template>
                       </b-modal>
 
                       <!-- supprimer commentaire -->
@@ -132,6 +141,14 @@
                         centered
                       >
                         <p>Le commentaire sera supprimé définitivement.</p>
+                        <template #modal-footer="{ ok, cancel }">
+                          <b-button variant="secondary" @click="cancel()"
+                            >Retour</b-button
+                          >
+                          <b-button variant="secondary" @click="ok()">
+                            Supprimer</b-button
+                          >
+                        </template>
                       </b-modal>
                     </b-dropdown>
                   </b-col>

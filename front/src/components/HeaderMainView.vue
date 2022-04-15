@@ -64,16 +64,16 @@
           <p class="menu-text">Publications</p>
         </b-nav-item>
 
-        <b-nav-item to="/myprofile" exact>
-          <div class="menu-text">
-            <ProfileImage
-              imageHeight="32"
-              :imageUrl="user.profilePhoto"
-              :alt="`avatar ${user.firstName}`"
-            /><br />
-            {{ user.firstName }} {{ user.lastName }}
-          </div>
-        </b-nav-item>
+        <!-- <b-nav-item to="/myprofile" exact> -->
+        <!--  <div class="menu-text"> -->
+        <!--    <ProfileImage -->
+        <!--      imageHeight="32" -->
+        <!--      :imageUrl="user.profilePhoto" -->
+        <!--      :alt="`avatar ${user.firstName}`" -->
+        <!--    /><br /> -->
+        <!--    {{ user.firstName }} {{ user.lastName }} -->
+        <!--  </div> -->
+        <!-- </b-nav-item> -->
 
         <b-nav-item to="/myprofile" exact>
           <div>
@@ -113,14 +113,14 @@
 <script>
 // import DateTime from "../components/DateTime.vue";
 import router from "../router/index";
-import ProfileImage from "../components/ProfileImage.vue";
+// import ProfileImage from "../components/ProfileImage.vue";
 
 export default {
   name: "HeaderMainView",
 
   components: {
-    //DateTime,
-    ProfileImage,
+    // DateTime,
+    // ProfileImage,
   },
 
   data() {

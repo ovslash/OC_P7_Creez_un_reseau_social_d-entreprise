@@ -15,8 +15,11 @@
             class="profileImage"
             alt="mon avatar"
           />
-          <label for="edit-profile-input" role="button"
-            >changer l'image de profil</label
+          <label
+            for="edit-profile-input"
+            role="button"
+            class="profile-image-change"
+            >Pour changer l'image</label
           >
           <input
             type="file"
@@ -267,5 +270,8 @@ export default {
 }
 .form-w2 {
   max-width: 150px;
+}
+.profile-image-change {
+  padding-left: 10px;
 }
 </style>

@@ -25,11 +25,12 @@
         right
         class="m-2"
         v-if="post.userId == this.userData.id || this.userData.admin == '1'"
-        v-b-tooltip.hover.v-secondary.left="'paramètres'"
         toggle-text="Options"
         aria-label="Options de la publication"
       >
-        <b-dropdown-item v-b-modal="'modal-modify' + post.id"
+        <b-dropdown-item
+          v-b-modal="'modal-modify' + post.id"
+          v-if="post.userId == this.userData.id"
           >Modifier</b-dropdown-item
         >
         <b-modal
