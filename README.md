@@ -50,15 +50,11 @@ A venir
 <h2>Site en local</h2>
 
 Front : A faire dans le dossier /front
-
-npm install
+-npm install
 - Pour lancer l'application : npm run serve
 - Pour couper l'application : Ctrl + C
 
----
-
 Back : A faire dans le dossier /back
-
 - Installation MySQL et création d'une BDD.
 - Création dossier /images
 - npm install
